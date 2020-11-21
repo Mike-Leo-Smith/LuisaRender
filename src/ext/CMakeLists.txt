@@ -10,7 +10,10 @@ add_library(mimalloc_config INTERFACE)
 # macOS 11 currently not working with mimalloc...
 # target_link_libraries(mimalloc_config INTERFACE mimalloc)
 
+add_subdirectory(fmt)
+
 set(SPDLOG_BUILD_SHARED ON CACHE BOOL "" FORCE)
+set(SPDLOG_FMT_EXTERNAL_HO ON CACHE BOOL "" FORCE)
 add_subdirectory(spdlog)
 add_library(spdlog_config INTERFACE)
 target_link_libraries(spdlog_config INTERFACE spdlog::spdlog_header_only mimalloc_config)

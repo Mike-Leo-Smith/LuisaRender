@@ -24,27 +24,13 @@ void CppCodegen::emit(const Function &f) {
 }
 
 void CppCodegen::visit(const ValueExpr *literal_expr) {
+    
     auto &&value = literal_expr->value();
-    auto flags = _os.flags();
-    _os << std::boolalpha << std::hexfloat;
+    
     std::visit([this](auto &&v) {
         
         // scalars
-        auto emit = [this](auto &&s) noexcept {
-            using T = std::decay_t<decltype(s)>;
-            if constexpr (std::is_same_v<T, bool>) { _os << s; }
-            else if constexpr (std::is_same_v<T, float>) {
-                if (std::isinf(s)) { _os << "static_cast<float>(1.0f / +0.0f)";
-                } else if (std::isnan(s)) { _os << "static_cast<float>(+0.0f / +0.0f)"; }
-                else { _os << s << "f"; }  // TODO: Better handling of inf/nan
-            } else if constexpr (std::is_same_v<T, int8_t>) { _os << "static_cast<int8_t>(" << s << ")"; }
-            else if constexpr (std::is_same_v<T, uint8_t>) { _os << "static_cast<uint8_t>(" << s << ")"; }
-            else if constexpr (std::is_same_v<T, int16_t>) { _os << "static_cast<int16_t>(" << s << ")"; }
-            else if constexpr (std::is_same_v<T, uint16_t>) { _os << "static_cast<uint16_t>(" << s << ")"; }
-            else if constexpr (std::is_same_v<T, int32_t>) { _os << s; }
-            else if constexpr (std::is_same_v<T, uint32_t>) { _os << s << "u"; }
-        };
-        
+        auto emit = [this](auto &&s) noexcept { _os << s; };
         using T = std::decay_t<decltype(v)>;
         
         // scalar
@@ -137,7 +123,6 @@ void CppCodegen::visit(const ValueExpr *literal_expr) {
             LUISA_EXCEPTION("Unknown value type.");
         }
     }, value);
-    _os.flags(flags);
 }
 
 void CppCodegen::_emit_struct_decl(const TypeDesc *desc) {

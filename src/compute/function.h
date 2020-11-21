@@ -11,6 +11,7 @@
 #include <stack>
 
 #include <core/platform.h>
+#include <core/memory_arena.h>
 
 namespace luisa::compute {
 class Texture;

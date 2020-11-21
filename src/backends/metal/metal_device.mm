@@ -33,7 +33,7 @@ private:
     id<MTLDevice> _handle;
     id<MTLCommandQueue> _command_queue;
     std::mutex _kernel_cache_mutex;
-    std::map<SHA1::Digest, id<MTLComputePipelineState>> _kernel_cache;
+    std::map<uint64_t, id<MTLComputePipelineState>> _kernel_cache;
     std::vector<std::unique_ptr<MetalDispatcher>> _dispatchers;
     uint32_t _next_dispatcher{0u};
     
@@ -79,15 +79,17 @@ MetalDevice::MetalDevice(Context *context, uint32_t device_id) : Device{context,
 
 std::shared_ptr<Kernel> MetalDevice::_compile_kernel(const compute::dsl::Function &f) {
     
-    std::ostringstream os;
+    static thread_local CodeScratch os;
+    static thread_local std::string s;
+    
+    os.clear();
     MetalCodegen codegen{os};
     codegen.emit(f);
-    auto s = os.str();
+    s = std::string{os.view()};
     
     if (_context->should_print_generated_source()) { LUISA_INFO("Generated source:\n", s); }
     
-    auto digest = SHA1{s}.digest();
-    
+    auto digest = murmur_hash_64a(s.data(), s.size(), 19980810);
     id<MTLComputePipelineState> pso = nullptr;
     
     {

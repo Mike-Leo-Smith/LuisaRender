@@ -9,7 +9,10 @@
 
 namespace luisa::metal {
 
-class MetalCodegen : public compute::dsl::CppCodegen {
+using compute::dsl::CppCodegen;
+using compute::dsl::CodeScratch;
+
+class MetalCodegen : public CppCodegen {
 
 protected:
     void _emit_function_decl(const compute::dsl::Function &f) override;
@@ -18,7 +21,7 @@ protected:
     void _emit_variable(const compute::dsl::Variable *v) override;
 
 public:
-    explicit MetalCodegen(std::ostream &os) noexcept : compute::dsl::CppCodegen{os} {}
+    explicit MetalCodegen(CodeScratch &os) noexcept : CppCodegen{os} {}
     void emit(const compute::dsl::Function &f) override;
     void visit(const compute::dsl::CastExpr *cast_expr) override;
 };
