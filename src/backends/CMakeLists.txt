@@ -4,11 +4,13 @@ function(luisa_render_add_backend name)
     cmake_parse_arguments(BACKEND "" "" "SOURCES" ${ARGN})
     add_library(luisa-backend-${name} MODULE ${BACKEND_SOURCES})
     target_compile_features(luisa-backend-${name} PRIVATE c_std_11 cxx_std_17)
-    target_link_libraries(luisa-backend-${name} PRIVATE mimalloc_config luisa-compute)
+#    target_link_libraries(luisa-backend-${name} PRIVATE mimimalloc_config luisa-compute)
+    target_link_libraries(luisa-backend-${name} PRIVATE luisa-compute)
     add_dependencies(luisa-backends luisa-backend-${name})
     set_target_properties(luisa-backend-${name} PROPERTIES
                           LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/bin/backends/"
-                          RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/bin/backends/")
+                          RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/bin/backends/"
+                          DEBUG_POSTFIX "")
 endfunction()
 
 if (LUISA_RENDER_ENABLE_METAL)

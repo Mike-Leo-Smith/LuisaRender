@@ -11,6 +11,11 @@ Shape wall : Instance {
 
 Material red : Lambert {
   albedo { 0.63, 0.065, 0.05 }
+  // emission { 0.1, 0.1, 0.1 }
+}
+
+Material emissive : Lambert {
+  emission { 0.1, 0.1, 0.1 }
 }
 
 Material green : Lambert {

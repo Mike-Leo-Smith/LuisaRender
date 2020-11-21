@@ -12,6 +12,8 @@ TRSTransform::TRSTransform(Device *device, const ParameterSet &parameter_set)
       _r{parameter_set["rotation"].parse_float4_or_default(make_float4(0.0f, 1.0f, 0.0f, 0.0f))},
       _s{parameter_set["scaling"].parse_float3_or_default(make_float3(parameter_set["scaling"].parse_float_or_default(1.0f)))} {
     
+    LUISA_EXCEPTION_IF(any(_s <= 0.0f), "Non-positive values found in scaling factor.");
+    
     _r.w = math::radians(_r.w);
     _matrix = math::translation(_t) * math::rotation(make_float3(_r), _r.w) * math::scaling(_s);
 }

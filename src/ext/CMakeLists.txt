@@ -7,7 +7,8 @@ set_target_properties(mimalloc PROPERTIES
                       RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/bin/"
                       WINDOWS_EXPORT_ALL_SYMBOLS ON)
 add_library(mimalloc_config INTERFACE)
-target_link_libraries(mimalloc_config INTERFACE mimalloc)
+# macOS 11 currently not working with mimalloc...
+# target_link_libraries(mimalloc_config INTERFACE mimalloc)
 
 set(SPDLOG_BUILD_SHARED ON CACHE BOOL "" FORCE)
 add_subdirectory(spdlog)

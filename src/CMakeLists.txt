@@ -18,7 +18,8 @@ function(luisa_render_add_plugin name)
     add_dependencies(luisa-plugins luisa-${PLUGIN_CATEGORY}-${name})
     set_target_properties(luisa-${PLUGIN_CATEGORY}-${name} PROPERTIES
                           LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/bin/plugins/"
-                          RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/bin/plugins/")
+                          RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/bin/plugins/"
+                          DEBUG_POSTFIX "")
 endfunction()
 
 add_subdirectory(cameras)
