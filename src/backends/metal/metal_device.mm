@@ -105,11 +105,11 @@ std::shared_ptr<Kernel> MetalDevice::_compile_kernel(const compute::dsl::Functio
         }
         
         // Create PSO
-        auto function = [library newFunctionWithName:@(f.name().c_str())];
+        auto function = [library newFunctionWithName:@(f.name().data())];
         auto desc = [[MTLComputePipelineDescriptor alloc] init];
         desc.computeFunction = function;
         desc.threadGroupSizeIsMultipleOfThreadExecutionWidth = true;
-        desc.label = @(f.name().c_str());
+        desc.label = @(f.name().data());
         
         error = nullptr;
         pso = [_handle newComputePipelineStateWithDescriptor:desc options:MTLPipelineOptionNone reflection:nullptr error:&error];

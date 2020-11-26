@@ -12,6 +12,7 @@
 
 #include <core/platform.h>
 #include <core/memory_arena.h>
+#include <OpenImageIO/ustring.h>
 
 namespace luisa::compute {
 class Texture;
@@ -32,7 +33,9 @@ public:
     static constexpr auto texture_sample_bit = 4u;
 
 private:
-    std::string _name;
+    MemoryArena _arena;
+    std::string_view _name;
+    
     std::vector<std::unique_ptr<Variable>> _builtins;
     std::vector<std::unique_ptr<Variable>> _variables;
     std::vector<std::unique_ptr<Variable>> _threadgroup_variables;
@@ -48,13 +51,13 @@ private:
     void _use_structure_type(const TypeDesc *type) noexcept;
 
 public:
-    explicit Function(std::string name) noexcept;
+    explicit Function(std::string_view name) noexcept;
     [[nodiscard]] static Function &current() noexcept;
     static void push(Function *f) noexcept;
     static void pop(Function *f) noexcept;
     
     [[nodiscard]] uint32_t next_uid() noexcept { return ++_uid_counter; }
-    [[nodiscard]] const std::string &name() const noexcept { return _name; }
+    [[nodiscard]] std::string_view name() const noexcept { return _name; }
     
     template<typename F, std::enable_if_t<std::is_invocable_v<F>, int> = 0>
     void with_scope(ScopeStmt *scope, F &&f) {

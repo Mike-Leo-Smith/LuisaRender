@@ -7,6 +7,7 @@ target_compile_definitions(luisa-core PUBLIC NOMINMAX)
 
 target_link_libraries(luisa-core PUBLIC mimalloc_config spdlog_config cxxopts_config luisa-headers ${CMAKE_DL_LIBS})
 set_target_properties(luisa-core PROPERTIES
+                      UNITY_BUILD ON
                       PUBLIC_HEADER "${HEADER_FILES}"
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/bin/"
                       RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/bin/"

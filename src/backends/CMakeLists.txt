@@ -8,6 +8,7 @@ function(luisa_render_add_backend name)
     target_link_libraries(luisa-backend-${name} PRIVATE luisa-compute)
     add_dependencies(luisa-backends luisa-backend-${name})
     set_target_properties(luisa-backend-${name} PROPERTIES
+                          UNITY_BUILD ON
                           LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/bin/backends/"
                           RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/bin/backends/"
                           DEBUG_POSTFIX "")

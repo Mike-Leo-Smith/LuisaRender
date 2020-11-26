@@ -15,7 +15,8 @@ Function &Function::current() noexcept {
     return *_current.top();
 }
 
-Function::Function(std::string name) noexcept: _name{std::move(name)} {
+Function::Function(std::string_view name) noexcept {
+    _name = _arena.allocate_string(name);
     _body = std::make_unique<ScopeStmt>();
     _scope_stack.push(_body.get());
 }

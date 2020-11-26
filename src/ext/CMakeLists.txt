@@ -10,6 +10,10 @@ add_library(mimalloc_config INTERFACE)
 # macOS 11 currently not working with mimalloc...
 # target_link_libraries(mimalloc_config INTERFACE mimalloc)
 
+find_package(OpenImageIO CONFIG REQUIRED)
+add_library(oiio_config INTERFACE)
+target_link_libraries(oiio_config INTERFACE OpenImageIO::OpenImageIO)
+
 add_subdirectory(fmt)
 
 set(SPDLOG_BUILD_SHARED ON CACHE BOOL "" FORCE)

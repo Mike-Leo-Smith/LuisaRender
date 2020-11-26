@@ -46,7 +46,7 @@ public:
         return _format("{:a}f", x);
     }
     CodeScratch &operator<<(bool x) { return _format(x ? "true" : "false"); }
-//    CodeScratch &operator<<(char x) { return _format("static_cast<char>({})", static_cast<int>(x)); }
+    CodeScratch &operator<<(char x) { return _format("static_cast<char>({})", static_cast<int>(x)); }  // Very error-prone, use carefully...
     CodeScratch &operator<<(uchar x) { return _format("static_cast<uchar>({})", static_cast<uint>(x)); }
     CodeScratch &operator<<(short x) { return _format("static_cast<short>({})", static_cast<int>(x)); }
     CodeScratch &operator<<(ushort x) { return _format("static_cast<ushort>({})", static_cast<uint>(x)); }

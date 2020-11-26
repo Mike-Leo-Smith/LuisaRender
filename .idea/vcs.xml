@@ -5,6 +5,7 @@
     <mapping directory="$PROJECT_DIR$/src/ext/OpenCL-CLHPP" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/ext/assimp" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/ext/cxxopts" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/ext/fmt" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/ext/jitify" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/ext/mimalloc" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/ext/spdlog" vcs="Git" />
