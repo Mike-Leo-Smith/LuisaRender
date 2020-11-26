@@ -1,27 +1,12 @@
 [submodule "src/ext/jitify"]
 	path = src/ext/jitify
 	url = https://github.com/NVIDIA/jitify.git
-[submodule "src/ext/spdlog"]
-	path = src/ext/spdlog
-	url = https://github.com/gabime/spdlog.git
-[submodule "src/ext/cxxopts"]
-	path = src/ext/cxxopts
-	url = https://github.com/jarro2783/cxxopts.git
 [submodule "src/ext/tinyexr"]
 	path = src/ext/tinyexr
 	url = https://github.com/syoyo/tinyexr.git
 [submodule "src/ext/stb"]
 	path = src/ext/stb
 	url = https://github.com/nothings/stb.git
-[submodule "src/ext/assimp"]
-	path = src/ext/assimp
-	url = https://github.com/assimp/assimp.git
 [submodule "src/ext/OpenCL-CLHPP"]
 	path = src/ext/OpenCL-CLHPP
 	url = https://github.com/KhronosGroup/OpenCL-CLHPP.git
-[submodule "src/ext/mimalloc"]
-	path = src/ext/mimalloc
-	url = https://github.com/microsoft/mimalloc.git
-[submodule "src/ext/fmt"]
-	path = src/ext/fmt
-	url = https://github.com/fmtlib/fmt.git

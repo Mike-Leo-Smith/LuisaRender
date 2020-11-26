@@ -50,7 +50,7 @@ Context::Context(int argc, char *argv[])
 const cxxopts::ParseResult &Context::_parse_result() const noexcept {
     if (!_parsed_cli_options.has_value()) {
         _cli_options.parse_positional("positional");
-        _parsed_cli_options.emplace(_cli_options.parse(const_cast<int &>(_argc), const_cast<const char **&>(_argv)));
+        _parsed_cli_options.emplace(_cli_options.parse(const_cast<int &>(_argc), const_cast<char **&>(_argv)));
     }
     return *_parsed_cli_options;
 }
